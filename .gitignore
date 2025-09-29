@@ -1,0 +1,273 @@
+# ------------------------------
+# .gitignore completo (multiplataforma)
+# ------------------------------
+
+# Sistema operativo
+####################
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Icon?
+Icon?
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# Editor / IDE
+####################
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains (IntelliJ, WebStorm, PhpStorm)
+.idea/
+*.iml
+out/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim / Emacs swap, sessions, backup
+*.swp
+*.swo
+.session.vim
+.*.swp
+
+# ------------------------------
+# Node / JavaScript / TypeScript
+# ------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnp/
+.pnp.js
+
+# Lockfiles: generalmente se recomienda commitear el lockfile.
+# Si quieres ignorar alguno (no recomendado) descomenta.
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# pnpm store (local caches)
+.pnpm-store/
+.pnpm/
+
+# env / secrets
+.env
+.env.*.local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.secret
+*.key
+*.pem
+secrets.*
+.credentials
+
+# Build outputs
+dist/
+build/
+.out/
+public/build/
+coverage/
+.nyc_output/
+coverage-final.json
+reports/
+*.tgz
+
+# Next.js
+.next/
+.next/cache/
+.next/static/
+.next/*.log
+
+# Gatsby
+.cache/
+public/
+
+# Create React App
+build/
+.react/
+
+# Parcel
+.cache/
+
+# Rollup
+dist/
+bundle/
+*.tsbuildinfo
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+
+# Test and coverage
+coverage/
+coverage-lcov/
+jest-*.json
+test-results.xml
+.nyc_output
+
+# Storybook
+.storybook/out
+out-storybook
+storybook-static
+
+# ------------------------------
+# Docker
+# ------------------------------
+# Docker artifacts and images
+docker-compose.override.yml
+.docker/
+
+# ------------------------------
+# CI / CD
+# ------------------------------
+/.github/workflows/.secret
+/azure-pipelines.yml.tmp
+
+# ------------------------------
+# Database / Data
+# ------------------------------
+*.sqlite
+*.sqlite3
+*.db
+*.sql
+*.sql.gz
+dump.sql
+*.dump
+*.bak
+
+# ------------------------------
+# OS / Misc
+# ------------------------------
+.vagrant/
+*.box
+*.iso
+
+# Archives / packages
+*.7z
+*.gz
+*.zip
+*.tar
+*.rar
+
+# Certificates / keys
+*.crt
+*.cer
+*.key
+*.pfx
+
+# ------------------------------
+# Mobile / Electron / Native
+# ------------------------------
+# Android
+*.apk
+*.aar
+.gradle/
+local.properties
+/.idea/caches
+/.idea/gradle.xml
+/.idea/libraries
+/.idea/workspace.xml
+/captures/
+
+# iOS / Xcode
+*.xcworkspace
+!Podfile
+Pods/
+DerivedData/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/
+*.xcuserstate
+
+# Cordova / Capacitor
+www/
+build/
+
+# ------------------------------
+# Language-specific (quick picks)
+# ------------------------------
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+env/
+venv/
+ENV/
+.venv/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+build/
+
+# PHP / Composer
+/vendor/
+composer.lock    # Nota: comúnmente se commitea composer.lock, descomenta si quieres ignorarlo
+
+# Ruby
+*.gem
+*.bundle
+/vendor/bundle
+
+# Go
+bin/
+*.exe
+*.test
+
+# Rust
+/target/
+
+# ------------------------------
+# Generated docs / IDE metadata
+# ------------------------------
+doc/
+docs/
+*.log
+
+# ------------------------------
+# Local OS / user specific
+# ------------------------------
+*.local
+*.user
+*.suo
+*.ntvs*
+*.njsproj
+
+# ------------------------------
+# Optional: ignore generated API keys or local test files
+# ------------------------------
+*.env.test
+local-*.json
+
+# ------------------------------
+# End
+# ------------------------------

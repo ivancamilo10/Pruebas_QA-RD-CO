@@ -1,1 +1,3 @@
-# Pruebas_QA-RD-CO
+# PruebasQA-GBM
+
+Andres Pereira
