@@ -1,0 +1,5 @@
+com\automation\acceptancetests\AcceptanceTestSuite.class
+com\automation\pages\LoginPage.class
+com\automation\steps\LoginSteps.class
+com\automation\runners\LoginTestRunner.class
+com\automation\steps\MathsStepDefinitions.class
