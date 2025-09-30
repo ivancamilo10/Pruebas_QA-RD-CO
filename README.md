@@ -1,5 +1,6 @@
-# Pruebas_QA-RD-CO
- 
+
+# Pruebas_QA-RD-CO <img src="https://flagcdn.com/w20/do.png" alt="RD" width="25"/>  <img src="https://flagcdn.com/w20/co.png" alt="CO" width="25"/>
+
 ## **Descripción**
 Este repositorio contiene los ejercicios y carpetas individuales de los practicantes de la empresa.  
 Cada participante tiene su propia carpeta.
