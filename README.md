@@ -14,7 +14,7 @@ El objetivo de este repositorio es **centralizar el trabajo de todos los practic
  
 ## **Uso**
 - Cada participante debe trabajar en su **propia rama**.  
-- Los cambios se integran a **`main`** mediante *Pull Requests*.  
+- Los cambios se integran a la rama que le corresponde a cada quien mediante *Pull Requests*.  
 - Se recomienda mantener cada carpeta organizada con subcarpetas y archivos.
  
 ## **Notas**
