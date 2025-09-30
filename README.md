@@ -1,6 +1,5 @@
 # Pruebas_QA-RD-CO
-Repositorio: **PruebasQA-GBM**  
-
+ 
 ## **Descripción**
 Este repositorio contiene los ejercicios y carpetas individuales de los practicantes de la empresa.  
 Cada participante tiene su propia carpeta.
