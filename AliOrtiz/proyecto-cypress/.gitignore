@@ -1,0 +1,24 @@
+# Dependencias
+node_modules/
+
+# Archivos de log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cachés
+.cache/
+.cypress-cache/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de entorno (si usas variables secretas)
+.env
+.env.local
+.env.*.local
+
+# Carpeta de salida de Cypress
+cypress/videos/
+cypress/screenshots/

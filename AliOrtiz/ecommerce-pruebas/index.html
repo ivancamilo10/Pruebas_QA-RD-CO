@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>eCommerce Estilo Mercado Libre</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-flex">
+      <a href="#" class="logo">Mi Mercado</a>
+      <input type="search" id="search" placeholder="Buscar productos, marcas y más">
+      <button class="cart-btn" id="cart-btn">🛒 <span id="cart-count">0</span></button>
+    </div>
+  </header>
+
+  <!-- Filtros -->
+  <div class="container filter-bar">
+    <select id="category">
+      <option value="all">Todas las categorías</option>
+    </select>
+
+    <label>
+      Hasta $<span id="price-label">1000</span>
+      <input type="range" id="price" min="0" max="1000" value="1000">
+    </label>
+
+    <select id="sort">
+      <option value="default">Ordenar por</option>
+      <option value="price-asc">Precio menor</option>
+      <option value="price-desc">Precio mayor</option>
+      <option value="name-asc">Nombre A-Z</option>
+      <option value="name-desc">Nombre Z-A</option>
+    </select>
+  </div>
+
+  <!-- Contenido principal -->
+  <main class="container">
+    <h2>Ofertas del día</h2>
+    <section id="products" class="products-grid"></section>
+
+    <h2>Electrónica</h2>
+    <section id="electronics" class="products-grid"></section>
+
+    <h2>Hogar</h2>
+    <section id="home" class="products-grid"></section>
+
+    <h2>Ropa</h2>
+    <section id="clothes" class="products-grid"></section>
+  </main>
+
+  <!-- Modal Carrito -->
+  <div id="cart-modal" class="cart-modal" aria-hidden="true">
+    <div class="cart-panel">
+      <header>
+        <h3>Carrito de Compras</h3>
+        <button id="close-cart">✕</button>
+      </header>
+      <div id="cart-items"></div>
+      <div class="cart-total">
+        Total: <span id="cart-total">$0</span>
+      </div>
+      <button id="checkout">Finalizar compra</button>
+    </div>
+  </div>
+
+  <!-- Templates -->
+  <template id="product-template">
+    <article class="product-card">
+      <img class="product-img" alt="">
+      <h4 class="product-title"></h4>
+      <p class="product-price"></p>
+      <button class="add-to-cart">Agregar al carrito</button>
+    </article>
+  </template>
+
+  <template id="cart-item-template">
+    <div class="cart-item">
+      <span class="cart-item-title"></span>
+      <span class="cart-item-price"></span>
+      <input type="number" class="item-qty" min="1" value="1">
+      <button class="remove-item">Eliminar</button>
+    </div>
+  </template>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
