@@ -1,0 +1,86 @@
+# CI en cada commit y PR (solo si cambian archivos dentro de UI_test/**)
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - UI_test/**
+  batch: true
+
+pr:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - UI_test/**
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  PROJ_DIR: 'UI_test'
+
+steps:
+  # Cache de Gradle para acelerar builds
+  - task: Cache@2
+    inputs:
+      key: 'gradle | "$(Agent.OS)" | **/gradle.lockfile, **/build.gradle.kts, **/settings.gradle.kts'
+      restoreKeys: |
+        gradle | "$(Agent.OS)"
+      path: '$(UserProfile)\.gradle\caches'
+    displayName: 'Cache Gradle'
+
+  # Ejecuta Gradle con el JDK 17 preinstalado en el agente
+  - powershell: |
+      Write-Host "Setting JAVA_HOME to $(JAVA_HOME_17_X64)"
+      $env:JAVA_HOME = "$(JAVA_HOME_17_X64)"
+      $env:Path = "$env:JAVA_HOME\bin;$env:Path"
+
+      cd "$(System.DefaultWorkingDirectory)\$(PROJ_DIR)"
+      .\gradlew.bat --version
+      .\gradlew.bat clean test -DHEADLESS=true -DDEMO_MODE=false --stacktrace --info --no-daemon
+    displayName: 'Gradle clean test (PowerShell, JDK 17)'
+
+  # Publica SIEMPRE los resultados JUnit (para que aparezca la pestaña Tests)
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '$(System.DefaultWorkingDirectory)/$(PROJ_DIR)/build/test-results/test/*.xml'
+      searchFolder: '$(System.DefaultWorkingDirectory)'
+      mergeTestResults: true
+      failTaskOnFailedTests: true
+      testRunTitle: 'Selenium UI Tests'
+    condition: always()
+    displayName: 'Publish JUnit results'
+
+  # Detecta si existen carpetas de screenshots y HTML (corre siempre)
+  - powershell: |
+      $art = "$(System.DefaultWorkingDirectory)\$(PROJ_DIR)\build\artifacts"
+      $html = "$(System.DefaultWorkingDirectory)\$(PROJ_DIR)\build\reports\tests\test"
+      if (Test-Path $art)  { Write-Host "##vso[task.setvariable variable=publishArtifacts]true" } else { Write-Host "##vso[task.setvariable variable=publishArtifacts]false" }
+      if (Test-Path $html) { Write-Host "##vso[task.setvariable variable=publishHtml]true" } else { Write-Host "##vso[task.setvariable variable=publishHtml]false" }
+    name: checkOutputs
+    condition: always()
+    displayName: 'Check outputs (artifacts & HTML report)'
+
+  # Screenshots (solo si existen)
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(System.DefaultWorkingDirectory)\$(PROJ_DIR)\build\artifacts'
+      ArtifactName: 'selenium-artifacts'
+      publishLocation: 'Container'
+    condition: and(always(), eq(variables.publishArtifacts, 'true'))
+    displayName: 'Publish screenshots (if any)'
+
+  # Reporte HTML de Gradle (index.html) si existe
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(System.DefaultWorkingDirectory)\$(PROJ_DIR)\build\reports\tests\test'
+      ArtifactName: 'junit-html-report'
+      publishLocation: 'Container'
+    condition: and(always(), eq(variables.publishHtml, 'true'))
+    displayName: 'Publish Gradle HTML report'
+
+

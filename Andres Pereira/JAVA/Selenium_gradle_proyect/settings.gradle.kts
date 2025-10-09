@@ -1,0 +1,1 @@
+rootProject.name = "Selenium_gradle_proyect"
