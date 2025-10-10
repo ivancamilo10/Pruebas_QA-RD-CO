@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Reporte ortográfico - __PAGE__</title>
+    <style>
+        :root {
+            --accent: #0b6b60;
+            --muted: #6b7280;
+            --card: #ffffff;
+            --bg: #f3f6f9;
+            --maxw: 1100px;
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+            background: var(--bg);
+            margin: 0;
+            color: #0f172a
+        }
+
+        .wrap {
+            max-width: var(--maxw);
+            margin: 20px auto;
+            padding: 12px
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+            margin-bottom: 12px;
+            max-height: 1000px;
+            overflow: auto;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 18px
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .stats {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap
+        }
+
+        .stat {
+            background: linear-gradient(180deg, #fff, #fbfdff);
+            padding: 8px 12px;
+            border-radius: 8px;
+            min-width: 140px;
+        }
+
+        .stat b {
+            display: block;
+            font-size: 16px
+        }
+
+        .chart img {
+            max-width: 100%;
+            height: auto;
+            display: block
+        }
+
+        /* 📸 Bloque de la captura optimizado */
+        .screenshot-box {
+            border: 1px solid #e6eef0;
+            border-radius: 8px;
+            /* overflow:scroll; */
+            /* height: 200px; */
+            background: #fff;
+            padding: 8px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .screenshot-box img {
+            display: block;
+            width: 100%;
+            height: 100%;
+
+            max-width: none;
+            max-height: none;
+        }
+
+        /* 
+  .screenshot-box img:hover{
+    transform: scale(1.2); /* zoom suave */
+        cursor: zoom-out;
+        }
+
+        */ table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px
+        }
+
+        th,
+        td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f1f5f9;
+            text-align: left
+        }
+
+        .top-table-container {
+            max-height: 36vh;
+            overflow: auto;
+            border: 1px solid #eef2f6;
+            border-radius: 8px
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            background: var(--accent);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            border: none
+        }
+
+        .btn.secondary {
+            background: #edf2f7;
+            color: #0f172a
+        }
+
+        .search {
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #e6eef0;
+            min-width: 200px
+        }
+
+        footer {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 8px;
+            text-align: center
+        }
+
+        .elem .card {
+            padding: 10px
+        }
+
+        @media (max-width:900px) {
+            .stats {
+                flex-direction: column
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="card">
+            <header>
+                <h1>Reporte de revisión ortográfica</h1>
+                <div class="meta">Página analizada: <strong>__PAGE__</strong> — Fecha: __FECHA__</div>
+            </header>
+            <div class="stats" style="margin-top:10px">
+                <div class="stat">
+                    <div class="meta">Párrafos analizados</div><b>__PARAGRAPHS__</b>
+                </div>
+                <div class="stat">
+                    <div class="meta">Palabras analizadas</div><b>__WORDS__</b>
+                </div>
+                <div class="stat">
+                    <div class="meta">Faltas ortográficas (ocurrencias)</div><b>__ERRORS__</b>
+                </div>
+                <div class="stat">
+                    <div class="meta">Errores únicos</div><b>__UNIQUE__</b>
+                </div>
+            </div>
+            <div style="margin-top:10px" class="controls">
+                <button class="btn" onclick="window.print()">Imprimir / Guardar PDF</button>
+                <input class="search" id="qsearch" placeholder="Filtrar top (ej: 'laptops')" oninput="filterTable()" />
+            </div>
+        </div>
+
+        <div class="card" style="display:flex;gap:12px;flex-wrap:wrap">
+            <div style="flex:1;min-width:320px">
+                <h3>Top __TOPN__ errores</h3>
+                <div class="chart"><img alt="chart-bar" src="data:image/png;base64,__CHARTBAR__" /></div>
+            </div>
+            <div style="width:320px;">
+                <h3>Distribución de palabras</h3>
+                <div class="chart"><img alt="chart-pie" src="data:image/png;base64,__CHARTPIE__" /></div>
+                <div class="meta" style="margin-top:8px">Palabras buenas: <b>__GOODWORDS__</b></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Captura de la página</h3>
+            __SCREENSHOT_BLOCK__
+        </div>
+
+        <div class="card">
+            <h3>Tabla: Top __TOPN__ errores</h3>
+            <div class="top-table-container">
+                <table id="topTable">
+                    <thead>
+                        <tr>
+                            <th>Error</th>
+                            <th>Frecuencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        __TOP_ROWS__
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Detalle por párrafo con faltas</h3>
+            __ELEMENTS_DETAIL__
+        </div>
+
+        <footer class="card">
+            Generado automáticamente — Carpeta: <code>__FOLDER__</code>
+        </footer>
+    </div>
+
+    <script>
+        function filterTable() {
+            const q = document.getElementById('qsearch').value.toLowerCase().trim();
+            const tb = document.getElementById('topTable').getElementsByTagName('tbody')[0];
+            for (const row of Array.from(tb.rows)) {
+                const txt = (row.cells[0].innerText + " " + row.cells[1].innerText).toLowerCase();
+                row.style.display = q === "" || txt.indexOf(q) !== -1 ? "" : "none";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
